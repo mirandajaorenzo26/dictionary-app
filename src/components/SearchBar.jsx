@@ -1,14 +1,17 @@
 import { useState, useRef } from "react";
-
+import { FaSearch } from "react-icons/fa";
 function SearchBar({ onSearch }) {
   const [searchWord, setSearchWord] = useState("");
   const inputRef = useRef();
   return (
-    <form action="" className="flex gap-2">
+    <form
+      action=""
+      className="flex flex-wrap gap-2 rounded-lg bg-neutral-200 py-2 pl-5 dark:bg-neutral-800 "
+    >
       <input
+        className="flex-1 bg-transparent text-lg outline-none"
         ref={inputRef}
         type="text"
-        className="px-5 py-2 border rounded-md"
         onChange={(e) => {
           setSearchWord(e.target.value);
         }}
@@ -19,9 +22,9 @@ function SearchBar({ onSearch }) {
           onSearch(e, searchWord);
           inputRef.current.value = "";
         }}
-        className="px-5 py-2 bg-gray-500 text-white rounded-md"
+        className="px-3"
       >
-        Search
+        <FaSearch size={24} className="size={24} fill-violet-600" />
       </button>
     </form>
   );

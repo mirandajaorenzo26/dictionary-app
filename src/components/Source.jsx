@@ -9,7 +9,7 @@ const Source = () => {
       {results.length !== 0 && (
         <>
           <hr />
-          <div className="flex gap-2">
+          <div className="mt-5 gap-2 lg:flex">
             <p>Source: </p>
             {results[0]?.sourceUrls.map((url) => {
               return (

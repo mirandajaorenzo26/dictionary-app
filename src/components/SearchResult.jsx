@@ -7,49 +7,62 @@ function SearchResult() {
   const audioBtn = useRef();
   return (
     <>
-      <div>
-        <h1 className="text-2xl font-bold">{results[0]?.word}</h1>
-        <p>{results[0]?.phonetic}</p>
-      </div>
-      {results[0]?.phonetics.filter((phonetic) => phonetic.audio)[0]?.audio && (
-        <button
-          onClick={() => {
-            audioBtn.current.play();
-          }}
-        >
-          <HiVolumeUp />
-          <audio
-            ref={audioBtn}
-            src={
-              results[0]?.phonetics.filter((phonetic) => phonetic.audio)[0]
-                .audio
-            }
-          ></audio>
-        </button>
+      {results.length === 0 && (
+        <p className="text-x my-5 text-center font-bold uppercase text-neutral-600">
+          Search for a word
+        </p>
       )}
+
+      <div className="mt-5 flex items-center justify-between">
+        <div className="">
+          <h1 className="my-2 text-4xl font-bold lg:text-6xl">
+            {results[0]?.word}
+          </h1>
+          <p className="font-bold text-violet-600">{results[0]?.phonetic}</p>
+        </div>
+        {results[0]?.phonetics.filter((phonetic) => phonetic.audio)[0]
+          ?.audio && (
+          <button
+            onClick={() => {
+              audioBtn.current.play();
+            }}
+            className="grid h-12 w-12 items-center justify-center rounded-full bg-violet-600"
+          >
+            <HiVolumeUp size={24} className="fill-white" />
+            <audio
+              ref={audioBtn}
+              src={
+                results[0]?.phonetics.filter((phonetic) => phonetic.audio)[0]
+                  .audio
+              }
+            ></audio>
+          </button>
+        )}
+      </div>
+
       {/* MEANINGS */}
       {results[0]?.meanings.map((meaning) => {
         return (
           <div key={self.crypto.randomUUID()} className="my-5">
-            <p className="font-bold">{meaning.partOfSpeech}</p>
-            <h2>Meaning</h2>
-            <li className="ml-5">{meaning.definitions[0].definition}</li>
+            <p className="text-xl font-bold">{meaning.partOfSpeech}</p>
+            <p className=" mb-2 text-neutral-400">Meaning</p>
+            <li className="ml-5 ">{meaning.definitions[0].definition}</li>
 
             {/* Examples */}
             {meaning.definitions[0].example && (
-              <q className="text-gray-400 ml-5">
-                {meaning.definitions[0].example}
-              </q>
+              <li className="ml-5 mt-2 list-none text-neutral-400">
+                &ldquo;{meaning.definitions[0].example}&rdquo;
+              </li>
             )}
 
             {/* Synonyms */}
             {meaning.definitions[0].synonyms.length !== 0 && (
-              <div className="flex flex-wrap gap-2 ">
-                <p className="font-semibold text-gray-400 mr-2">Synonyms:</p>
+              <div className=" mt-5 flex  flex-wrap gap-2 italic">
+                <p className=" mr-2 text-neutral-400">Synonyms:</p>
                 {meaning.definitions[0].synonyms?.map((synonym) => (
                   <p
                     key={self.crypto.randomUUID()}
-                    className="text-violet-600 font-semibold
+                    className="font-semibold text-violet-600
                   "
                   >
                     {synonym}
@@ -60,13 +73,12 @@ function SearchResult() {
 
             {/* Antonyms */}
             {meaning.definitions[0].antonyms.length !== 0 && (
-              <div className="flex flex-wrap gap-2 ">
-                <p className="font-semibold text-gray-400 mr-2">Antonyms:</p>
+              <div className=" mt-5 flex flex-wrap gap-2 italic ">
+                <p className=" mr-2 text-neutral-400">Antonyms:</p>
                 {meaning.definitions[0].antonyms?.map((antonym) => (
                   <p
                     key={self.crypto.randomUUID()}
-                    className="text-violet-600 font-semibold
-                  "
+                    className="font-semibold text-violet-600"
                   >
                     {antonym}
                   </p>

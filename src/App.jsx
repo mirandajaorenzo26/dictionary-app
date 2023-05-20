@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 
+import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import SearchResult from "./components/SearchResult";
+import Source from "./components/Source";
 
 import SearchContext from "./contexts/SearchContext.js";
-import Source from "./components/Source";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -32,6 +33,7 @@ function App() {
   return (
     <>
       <SearchContext.Provider value={searchResults}>
+        <Header />
         <SearchBar onSearch={handleSearch} />
         <SearchResult />
         <Source />

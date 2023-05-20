@@ -33,9 +33,16 @@ function SearchResult() {
           <div key={self.crypto.randomUUID()} className="my-5">
             <p className="font-bold">{meaning.partOfSpeech}</p>
             <h2>Meaning</h2>
-            <ul className="list-disc">
-              <li className="ml-5">{meaning.definitions[0].definition}</li>
-            </ul>
+            <li className="ml-5">{meaning.definitions[0].definition}</li>
+
+            {/* Examples */}
+            {meaning.definitions[0].example && (
+              <q className="text-gray-400 ml-5">
+                {meaning.definitions[0].example}
+              </q>
+            )}
+
+            {/* Synonyms */}
             {meaning.definitions[0].synonyms.length !== 0 && (
               <div className="flex flex-wrap gap-2 ">
                 <p className="font-semibold text-gray-400 mr-2">Synonyms:</p>
@@ -46,6 +53,22 @@ function SearchResult() {
                   "
                   >
                     {synonym}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {/* Antonyms */}
+            {meaning.definitions[0].antonyms.length !== 0 && (
+              <div className="flex flex-wrap gap-2 ">
+                <p className="font-semibold text-gray-400 mr-2">Antonyms:</p>
+                {meaning.definitions[0].antonyms?.map((antonym) => (
+                  <p
+                    key={self.crypto.randomUUID()}
+                    className="text-violet-600 font-semibold
+                  "
+                  >
+                    {antonym}
                   </p>
                 ))}
               </div>

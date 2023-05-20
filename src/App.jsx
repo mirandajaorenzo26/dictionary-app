@@ -5,12 +5,13 @@ import SearchBar from "./components/SearchBar";
 import SearchResult from "./components/SearchResult";
 
 import SearchContext from "./contexts/SearchContext.js";
+import Source from "./components/Source";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
 
   // Function to handle the search
-  const handleSearch = (e, searchTerm) => {
+  const handleSearch = (e, searchWord) => {
     e.preventDefault();
     const apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en";
     // Perform the search logic and update the search results
@@ -25,7 +26,7 @@ function App() {
       }
     }
 
-    fetchData(searchTerm);
+    fetchData(searchWord);
   };
 
   return (
@@ -33,6 +34,7 @@ function App() {
       <SearchContext.Provider value={searchResults}>
         <SearchBar onSearch={handleSearch} />
         <SearchResult />
+        <Source />
       </SearchContext.Provider>
     </>
   );

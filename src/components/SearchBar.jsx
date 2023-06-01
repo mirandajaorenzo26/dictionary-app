@@ -6,10 +6,10 @@ function SearchBar({ onSearch }) {
   return (
     <form
       action=""
-      className="flex flex-wrap gap-2 rounded-lg bg-neutral-200 py-2 pl-5 dark:bg-neutral-800 "
+      className="flex justify-between gap-2 rounded-lg bg-neutral-200 py-2 pl-5 dark:bg-neutral-800 "
     >
       <input
-        className="flex-1 bg-transparent text-lg outline-none"
+        className="min-w-0 flex-1 bg-transparent text-lg outline-none"
         ref={inputRef}
         type="text"
         onChange={(e) => {
@@ -24,7 +24,7 @@ function SearchBar({ onSearch }) {
         }}
         className="px-3"
       >
-        <FaSearch size={24} className="size={24} fill-violet-600" />
+        <FaSearch size={24} className=" fill-violet-600" />
       </button>
     </form>
   );

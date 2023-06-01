@@ -4,12 +4,12 @@ import axios from "axios";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import SearchResult from "./components/SearchResult";
-import Source from "./components/Source";
 
 import SearchContext from "./contexts/SearchContext.js";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState({});
 
   // Function to handle the search
   const handleSearch = (e, searchWord) => {
@@ -20,10 +20,14 @@ function App() {
       try {
         const response = await axios.get(`${apiUrl}/${word}`);
         const data = response.data;
+
         setSearchResults(data);
+        setError({});
       } catch (error) {
+        const response = error.response;
+        const data = response.data;
+        setError(data);
         console.error("Error:", error);
-        throw error;
       }
     }
 
@@ -32,11 +36,10 @@ function App() {
 
   return (
     <>
-      <SearchContext.Provider value={searchResults}>
+      <SearchContext.Provider value={{ searchResults, error }}>
         <Header />
         <SearchBar onSearch={handleSearch} />
         <SearchResult />
-        <Source />
       </SearchContext.Provider>
     </>
   );
